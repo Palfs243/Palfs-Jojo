@@ -1,0 +1,1586 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#e8edeb">
+<title>The Us List</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Figtree:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style>
+  :root{
+    --bg:#e8edeb;
+    --surface:#f5f8f7;
+    --raised:#ffffff;
+    --border:#d3dcd9;
+    --border-strong:#bcc7c3;
+    --text:#15201e;
+    --dim:#54625f;
+    --faint:#849390;
+    --teal:#0f6d68;
+    --teal-strong:#0a544f;
+    --coral:#cf4a5c;
+    --coral-tint:#f3dde1;
+    --good:#3f7d5c;
+    --warn:#c0842b;
+    --map-sea:#eef3f2;
+    --map-land:#dce7e2;
+    --map-edge:#5b938d;
+    --map-grid:#cdd9d5;
+    --shadow-md:0 12px 32px -18px rgba(16,32,30,.30);
+    --radius:14px;
+    --radius-sm:9px;
+    --maxw:1140px;
+    --font-display:'Fraunces','Iowan Old Style',Georgia,serif;
+    --font-ui:'Figtree',system-ui,-apple-system,'Segoe UI',sans-serif;
+    --font-mono:'IBM Plex Mono',ui-monospace,'SF Mono',Menlo,monospace;
+    color-scheme:light;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0e1413; --surface:#151d1b; --raised:#1b2523;
+      --border:#2a3532; --border-strong:#3a4744;
+      --text:#e7ecea; --dim:#a3b2ae; --faint:#71827e;
+      --teal:#54bcb2; --teal-strong:#74ccc3;
+      --coral:#ea7d8d; --coral-tint:#38262a;
+      --good:#66b58b; --warn:#d7a44e;
+      --map-sea:#111a19; --map-land:#1e2a27; --map-edge:#3f807a; --map-grid:#2a3532;
+      --shadow-md:0 14px 36px -18px rgba(0,0,0,.72);
+      color-scheme:dark;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0e1413; --surface:#151d1b; --raised:#1b2523;
+    --border:#2a3532; --border-strong:#3a4744;
+    --text:#e7ecea; --dim:#a3b2ae; --faint:#71827e;
+    --teal:#54bcb2; --teal-strong:#74ccc3;
+    --coral:#ea7d8d; --coral-tint:#38262a;
+    --good:#66b58b; --warn:#d7a44e;
+    --map-sea:#111a19; --map-land:#1e2a27; --map-edge:#3f807a; --map-grid:#2a3532;
+    --shadow-md:0 14px 36px -18px rgba(0,0,0,.72);
+    color-scheme:dark;
+  }
+
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--font-ui);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased}
+  img{max-width:100%}
+  h1,h2,h3,h4,p{margin:0}
+  button{font-family:inherit}
+  a{color:var(--teal)}
+  :focus-visible{outline:2px solid var(--teal);outline-offset:2px;border-radius:5px}
+
+  .app{max-width:var(--maxw);margin:0 auto;padding:28px 22px 64px}
+
+  .masthead{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  .brand{display:flex;gap:13px;align-items:center}
+  .brand-mark{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--coral);color:#fff;font-size:18px;flex-shrink:0}
+  .brand h1{font-family:var(--font-display);font-weight:500;font-size:27px;letter-spacing:-.01em;text-wrap:balance}
+  .tagline{color:var(--dim);font-size:13px;margin-top:1px}
+  .tabs{display:flex;gap:0;border-bottom:1px solid var(--border);margin-top:24px;overflow-x:auto;scrollbar-width:none}
+  .tabs::-webkit-scrollbar{display:none}
+  .tab{flex:0 0 auto;background:none;border:none;padding:11px 2px;margin-right:26px;color:var(--dim);font-size:15px;font-weight:500;cursor:pointer;border-bottom:2px solid transparent;transform:translateY(1px);white-space:nowrap}
+  .tab:hover{color:var(--text)}
+  .tab.is-active{color:var(--text);border-bottom-color:var(--coral)}
+
+  .panel{padding-top:26px}
+  .panel[hidden]{display:none}
+  .panel-head{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap;margin-bottom:20px}
+  .panel-head h2{font-family:var(--font-display);font-weight:500;font-size:20px}
+  .count{font-family:var(--font-mono);font-size:12px;color:var(--dim);margin-top:4px}
+
+  .btn{border:none;border-radius:var(--radius-sm);padding:9px 16px;font-size:14px;font-weight:600;cursor:pointer;background:var(--surface);color:var(--text)}
+  .btn.primary{background:var(--teal);color:#fff}
+  .btn.primary:hover{background:var(--teal-strong)}
+  .btn.ghost{background:transparent;border:1px solid var(--border-strong);color:var(--text)}
+  .btn.ghost:hover{border-color:var(--faint)}
+  .btn.soft{background:var(--coral-tint);color:var(--coral)}
+  .btn.tiny{padding:5px 11px;font-size:12.5px;border-radius:7px}
+
+  .icon-btn{background:none;border:none;cursor:pointer;color:var(--faint);padding:5px 7px;border-radius:7px;font-size:13px}
+  .icon-btn:hover{color:var(--text);background:var(--border)}
+
+  .muted{color:var(--faint)}
+  .sm{font-size:12.5px}
+  .pad{padding:16px 4px}
+
+  /* to-do rows */
+  .rows{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:8px}
+  .row{display:grid;grid-template-columns:auto 1fr auto;gap:13px;align-items:start;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px 14px}
+  .row.is-done .row-title{text-decoration:line-through;color:var(--faint)}
+  .check{width:22px;height:22px;border:1.6px solid var(--border-strong);border-radius:6px;background:var(--raised);cursor:pointer;display:grid;place-items:center;font-size:13px;color:#fff;line-height:1}
+  .row.is-done .check{background:var(--good);border-color:var(--good)}
+  .row-title{font-size:15px;font-weight:500}
+  .row-note{font-size:13px;color:var(--dim);margin-top:3px}
+  .row-actions{display:flex;gap:2px}
+
+  /* places */
+  .places-layout{display:grid;grid-template-columns:minmax(280px,370px) 1fr;gap:26px;align-items:start}
+  .map-wrap{position:sticky;top:16px}
+  .map-frame{background:var(--map-sea);border:1px solid var(--border);border-radius:var(--radius);padding:8px;overflow:hidden}
+  .map-frame svg{width:100%;height:auto;display:block;cursor:crosshair}
+  .legend{display:flex;flex-wrap:wrap;gap:12px;margin-top:10px;font-size:11.5px;color:var(--dim)}
+  .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:middle}
+  .legend .lg-home{background:var(--teal);border-radius:3px}
+  .legend .lg-pin{background:var(--coral)}
+  .legend .lg-sel{background:var(--teal)}
+  .map-hint{font-size:11.5px;color:var(--faint);margin-top:5px}
+  .place-loc{margin-top:6px;font-family:var(--font-mono);font-size:11.5px;color:var(--dim)}
+  .pc-row{display:flex;gap:8px}
+  .pc-row input{flex:1}
+  .pc-status{font-size:12px;margin-top:4px;min-height:1.1em;color:var(--faint)}
+  .pc-status.ok{color:var(--good)}
+  .pc-status.bad{color:var(--warn)}
+
+  .grat{stroke:var(--map-grid);stroke-width:1}
+  .sea{fill:var(--map-sea)}
+  .land{fill:var(--map-land);stroke:var(--map-edge);stroke-width:1.3;stroke-linejoin:round}
+  .cty{fill:none;stroke:var(--faint);stroke-width:1}
+  .cty-t{fill:var(--faint);font-family:var(--font-mono);font-size:8.5px}
+  .home-m{fill:var(--teal);stroke:var(--raised);stroke-width:1.6}
+  .home-t{fill:var(--text);font-family:var(--font-ui);font-size:9.5px;font-weight:600;text-anchor:end}
+  .pin{cursor:pointer}
+  .pin-shape{fill:var(--coral);stroke:var(--raised);stroke-width:1.4}
+  .pin-dot{fill:var(--raised)}
+  .pin.is-sel .pin-shape{fill:var(--teal)}
+  .pin-ring{fill:none;stroke:var(--teal);stroke-width:1.4;opacity:.5}
+  .pin:hover .pin-shape{filter:drop-shadow(0 2px 2px rgba(0,0,0,.3))}
+  .pin:focus-visible .pin-shape{stroke:var(--teal);stroke-width:2.6}
+
+  .places-list{display:flex;flex-direction:column;gap:10px}
+  .place-card{background:var(--surface);border:1px solid var(--border);border-left:3px solid transparent;border-radius:var(--radius-sm);padding:13px 15px;cursor:pointer}
+  .place-card:hover{border-color:var(--border-strong)}
+  .place-card.is-sel{border-left-color:var(--coral);background:var(--raised);box-shadow:var(--shadow-md)}
+  .place-top{display:flex;justify-content:space-between;gap:10px;align-items:start}
+  .place-top h3{font-size:15.5px;font-weight:600}
+  .chips{display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end;flex-shrink:0}
+  .chip{font-size:10.5px;letter-spacing:.03em;text-transform:uppercase;color:var(--dim);border:1px solid var(--border-strong);padding:2px 8px;border-radius:999px;white-space:nowrap;flex-shrink:0}
+  .chip.alt{color:var(--teal);border-color:var(--teal)}
+  .dist{margin-top:9px;font-family:var(--font-mono);font-size:12px;color:var(--dim)}
+  .dist b{font-size:15px;color:var(--text);font-weight:500}
+  .dist .sub{color:var(--faint)}
+  .place-note{margin-top:8px;font-size:13px;color:var(--dim)}
+  .place-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:11px}
+  .link{font-size:13px;font-weight:600;text-decoration:none}
+  .link:hover{text-decoration:underline}
+  .place-actions{display:flex;gap:2px}
+
+  /* watchlist */
+  .filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:18px}
+  .fbtn{border:1px solid var(--border);background:var(--surface);color:var(--dim);padding:5px 12px;border-radius:999px;font-size:12.5px;cursor:pointer}
+  .fbtn.is-on{background:var(--teal);color:#fff;border-color:var(--teal)}
+  .cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(258px,1fr));gap:14px}
+  .watch-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 15px;display:flex;flex-direction:column;gap:9px}
+  .watch-card.is-done{opacity:.7}
+  .watch-body{display:flex;gap:12px}
+  .watch-text{flex:1;min-width:0;display:flex;flex-direction:column;gap:9px}
+  .watch-poster{width:60px;flex-shrink:0;aspect-ratio:2/3;object-fit:cover;border-radius:6px;background:var(--bg);border:1px solid var(--border)}
+  .watch-head{display:flex;justify-content:space-between;gap:8px;align-items:start}
+  .watch-head h3{font-size:15.5px;font-weight:600;text-wrap:balance}
+  .watch-desc{font-size:13px;color:var(--dim);line-height:1.5}
+  .platforms{display:flex;flex-wrap:wrap;gap:6px}
+  .pf{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;color:var(--text);border:1px solid var(--border);padding:2px 8px;border-radius:999px}
+  .pf i{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+  .watch-foot{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:2px}
+
+  /* lucky dip */
+  .head-actions{display:flex;gap:8px;flex-wrap:wrap}
+  .dip{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:20px}
+  .dip-label{font-weight:600;font-size:13px}
+  .dip label{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--dim)}
+  .dip select{font:inherit;font-size:13px;padding:6px 8px;border:1px solid var(--border-strong);border-radius:7px;background:var(--raised);color:var(--text)}
+  .dip>.btn{margin-left:auto}
+  .dip-result{flex-basis:100%}
+  .dip-result[hidden]{display:none}
+  #dipWatchResult:not([hidden]){margin-bottom:18px}
+  .dip-hit{display:flex;gap:14px;justify-content:space-between;flex-wrap:wrap;background:var(--raised);border:1px solid var(--border-strong);border-left:3px solid var(--coral);border-radius:var(--radius-sm);padding:13px 15px;margin-top:4px}
+  .dip-hit-main{flex:1;min-width:190px}
+  .dip-kicker{font-family:var(--font-mono);font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:var(--coral)}
+  .dip-hit h4{font-family:var(--font-display);font-weight:500;font-size:17px;margin-top:3px}
+  .dip-meta{font-family:var(--font-mono);font-size:12px;color:var(--dim);margin-top:4px}
+  .dip-meta b{color:var(--text);font-size:14px}
+  .dip-note{font-size:13px;color:var(--dim);margin-top:6px;line-height:1.5}
+  .dip-hit .platforms{margin-top:9px}
+  .dip-hit-actions{display:flex;flex-direction:column;align-items:flex-end;gap:6px;flex-shrink:0}
+  .dip-poster{width:52px;flex-shrink:0;aspect-ratio:2/3;object-fit:cover;border-radius:5px;border:1px solid var(--border)}
+
+  /* holidays */
+  .holiday-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;align-items:start}
+  .holiday-card{border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);overflow:hidden}
+  .holiday-card.is-open{grid-column:1/-1;background:var(--raised);box-shadow:var(--shadow-md);border-color:var(--border-strong)}
+  .holiday-face{width:100%;text-align:left;background:none;border:none;cursor:pointer;padding:16px 18px;display:flex;gap:14px;justify-content:space-between;align-items:start;color:inherit;font:inherit}
+  .holiday-face-main{display:block}
+  .holiday-title{display:block;font-family:var(--font-display);font-weight:500;font-size:18px;text-wrap:balance;color:var(--text)}
+  .holiday-blurb{display:block;margin-top:6px;font-size:13.5px;color:var(--dim)}
+  .holiday-route{display:block;margin-top:9px;font-size:12.5px;color:var(--text)}
+  .holiday-route .arr{color:var(--coral);margin:0 4px}
+  .holiday-meta{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0}
+  .chev{color:var(--faint);transition:transform .2s}
+  .holiday-card.is-open .chev{transform:rotate(180deg)}
+  .holiday-body{padding:2px 18px 18px}
+  .route-line{display:flex;flex-wrap:wrap;align-items:center;gap:7px;padding:10px 0 4px}
+  .route-stop{display:inline-flex;align-items:center;gap:8px;background:var(--bg);border:1px solid var(--border);border-radius:999px;padding:4px 13px 4px 4px;font-size:13px}
+  .route-num{width:20px;height:20px;border-radius:50%;background:var(--teal);color:#fff;display:grid;place-items:center;font-family:var(--font-mono);font-size:11px;flex-shrink:0}
+  .route-num.sm{margin-right:9px}
+  .route-dash{width:16px;height:1px;background:var(--border-strong)}
+  .stop-details{display:flex;flex-direction:column;gap:15px;margin-top:12px}
+  .stop-detail h4{font-size:14.5px;display:flex;align-items:center;margin-bottom:6px}
+  .stop-detail ul{margin:0;padding-left:18px;display:flex;flex-direction:column;gap:3px}
+  .stop-detail li{font-size:13.5px;color:var(--dim);line-height:1.45}
+  .stop-detail p{font-size:13.5px;color:var(--dim)}
+  .holiday-actions{display:flex;gap:6px;margin-top:16px;padding-top:12px;border-top:1px solid var(--border)}
+
+  /* calendar */
+  .cal-bar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:16px}
+  .cal-bar h3{font-family:var(--font-display);font-weight:500;font-size:18px;min-width:10ch;text-align:center}
+  .cal-nav{background:var(--surface);border:1px solid var(--border-strong);border-radius:8px;width:32px;height:32px;cursor:pointer;font-size:16px;color:var(--text);line-height:1}
+  .cal-nav:hover{border-color:var(--faint)}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
+  .cal-head{background:var(--surface);padding:7px 4px;text-align:center;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--dim);font-weight:600}
+  .cal-cell{background:var(--raised);min-height:96px;padding:5px 6px 7px;display:flex;flex-direction:column;gap:3px;cursor:pointer;text-align:left}
+  .cal-cell:hover{background:var(--surface)}
+  .cal-cell.out{background:var(--surface)}
+  .cal-cell.out .cal-daynum{color:var(--faint)}
+  .cal-daynum{font-size:12px;font-family:var(--font-mono);color:var(--dim);align-self:flex-start;width:22px;height:22px;display:grid;place-items:center}
+  .cal-cell.is-today .cal-daynum{background:var(--coral);color:#fff;border-radius:50%;font-weight:600}
+  .cal-ev{display:block;width:100%;background:var(--teal);color:#fff;border:none;border-radius:4px;padding:2px 5px;font-size:10.5px;line-height:1.3;text-align:left;cursor:pointer;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .cal-ev b{font-weight:600;opacity:.85;font-family:var(--font-mono)}
+  .cal-ev:hover{background:var(--teal-strong)}
+  .cal-ev.span{background:var(--teal-strong);opacity:.92}
+  .cal-up{margin-top:22px}
+  .cal-up h4{font-family:var(--font-display);font-weight:500;font-size:15px;margin-bottom:10px}
+  .cal-up-row{display:flex;gap:12px;align-items:baseline;padding:9px 12px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);cursor:pointer;margin-bottom:6px}
+  .cal-up-row:hover{border-color:var(--border-strong)}
+  .cal-up-date{font-family:var(--font-mono);font-size:11.5px;color:var(--coral);white-space:nowrap;flex-shrink:0;min-width:9ch}
+  .cal-up-main{flex:1;min-width:0}
+  .cal-up-title{font-size:14px;font-weight:500;display:block}
+  .cal-up-sub{font-size:12px;color:var(--dim);margin-top:2px;display:block}
+  @media (max-width:620px){
+    .cal-cell{min-height:62px;padding:3px 3px 5px}
+    .cal-ev{font-size:9px;padding:1px 3px}
+    .cal-daynum{width:18px;height:18px;font-size:11px}
+  }
+
+  /* empty states */
+  .empty{text-align:center;padding:46px 20px;border:1px dashed var(--border-strong);border-radius:var(--radius);color:var(--dim)}
+  .empty .em-ic{font-size:24px;color:var(--coral)}
+  .empty h3{margin:12px 0 4px;font-family:var(--font-display);font-weight:500;color:var(--text);font-size:17px}
+  .empty p{margin:0 auto 16px;max-width:44ch;font-size:13.5px}
+  .empty .btn+.btn{margin-left:8px}
+
+  /* modal */
+  .modal-backdrop{position:fixed;inset:0;background:rgba(10,16,15,.5);display:flex;align-items:flex-start;justify-content:center;padding:40px 16px;overflow:auto;z-index:50}
+  .modal-backdrop[hidden]{display:none}
+  .modal{background:var(--raised);border:1px solid var(--border-strong);border-radius:var(--radius);width:min(520px,100%);box-shadow:var(--shadow-md)}
+  .modal-head{display:flex;justify-content:space-between;align-items:center;padding:15px 18px;border-bottom:1px solid var(--border)}
+  .modal-head h2{font-family:var(--font-display);font-weight:500;font-size:17px}
+  .modal-body{padding:16px 18px;display:flex;flex-direction:column;gap:13px}
+  .modal-foot{display:flex;justify-content:flex-end;gap:8px;padding:14px 18px;border-top:1px solid var(--border)}
+  #modalDelete{margin-right:auto}
+  .btn.danger{background:transparent;border:1px solid var(--border-strong);color:var(--warn)}
+  .btn.danger:hover{border-color:var(--warn)}
+  .field{display:flex;flex-direction:column;gap:5px}
+  .field label{font-size:12.5px;font-weight:600;color:var(--dim)}
+  .field input,.field select,.field textarea{font:inherit;font-size:14px;padding:8px 10px;border:1px solid var(--border-strong);border-radius:8px;background:var(--surface);color:var(--text);width:100%}
+  .field textarea{min-height:64px;resize:vertical}
+  .field .hint,.modal-body>.hint{font-size:12px;color:var(--faint)}
+  .checks{display:flex;flex-wrap:wrap;gap:7px 14px}
+  .checks label{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:400;color:var(--text)}
+  .checks input{width:auto}
+  .field .chk{display:flex;align-items:center;gap:8px;font-size:13.5px;font-weight:500;color:var(--text);cursor:pointer}
+  .field .chk input{width:auto;flex-shrink:0}
+  [hidden]{display:none!important}
+  .stop-row{border:1px solid var(--border);border-radius:9px;padding:10px;display:flex;flex-direction:column;gap:7px;background:var(--surface)}
+  .stop-row .srow-top{display:flex;gap:8px}
+  .stop-row .stop-place{flex:1}
+  .img-row{display:flex;gap:12px;align-items:flex-start}
+  .img-prev{width:74px;height:110px;flex-shrink:0;border:1px dashed var(--border-strong);border-radius:6px;display:grid;place-items:center;overflow:hidden;background:var(--surface)}
+  .img-prev img{width:100%;height:100%;object-fit:cover}
+  .img-prev:empty::after{content:"No image";font-size:10px;color:var(--faint)}
+  .img-ctl{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
+  .img-btns{display:flex;gap:6px}
+
+  .foot{margin-top:44px;padding-top:16px;border-top:1px solid var(--border);font-size:12px;color:var(--faint);font-family:var(--font-mono)}
+  .foot p{margin:0}
+  .foot-tools{display:flex;gap:8px;margin-top:12px}
+
+  @media (max-width:880px){
+    .places-layout{grid-template-columns:1fr}
+    .map-wrap{position:static}
+    .map-frame svg{max-height:64vh}
+  }
+  @media (max-width:560px){
+    .app{padding:20px 14px 48px}
+    .masthead{flex-direction:column;align-items:flex-start;gap:12px}
+  }
+  @media (prefers-reduced-motion:reduce){
+    *{transition-duration:.001ms!important;animation-duration:.001ms!important}
+  }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <header class="masthead">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">&#9829;</span>
+      <div>
+        <h1>The Us List</h1>
+        <p class="tagline">A plan for the two of us</p>
+      </div>
+    </div>
+  </header>
+
+  <nav class="tabs" role="tablist" aria-label="Sections" id="tabs">
+    <button role="tab" id="tab-todos" aria-controls="panel-todos" aria-selected="true" data-tab="todos" class="tab is-active">Things to do</button>
+    <button role="tab" id="tab-places" aria-controls="panel-places" aria-selected="false" tabindex="-1" data-tab="places" class="tab">Places to go</button>
+    <button role="tab" id="tab-watchlist" aria-controls="panel-watchlist" aria-selected="false" tabindex="-1" data-tab="watchlist" class="tab">Watchlist</button>
+    <button role="tab" id="tab-holidays" aria-controls="panel-holidays" aria-selected="false" tabindex="-1" data-tab="holidays" class="tab">Holidays</button>
+    <button role="tab" id="tab-calendar" aria-controls="panel-calendar" aria-selected="false" tabindex="-1" data-tab="calendar" class="tab">Calendar</button>
+  </nav>
+
+  <main>
+    <section id="panel-todos" role="tabpanel" aria-labelledby="tab-todos" tabindex="0" class="panel">
+      <div class="panel-head">
+        <div><h2>Things we want to do together</h2><p class="count" id="count-todo"></p></div>
+        <button class="btn primary" data-act="add-todo">+ Add</button>
+      </div>
+      <ul class="rows" id="todoList"></ul>
+    </section>
+
+    <section id="panel-places" role="tabpanel" aria-labelledby="tab-places" tabindex="0" class="panel" hidden>
+      <div class="panel-head">
+        <div><h2>Places we want to go</h2><p class="count" id="count-place"></p></div>
+        <button class="btn primary" data-act="add-place">+ Add</button>
+      </div>
+      <div class="dip">
+        <span class="dip-label">🎲 Lucky dip</span>
+        <label>Within
+          <select id="dipDist" title="Straight-line distance from home">
+            <option value="10">10 miles</option>
+            <option value="20">20 miles</option>
+            <option value="40" selected>40 miles</option>
+            <option value="75">75 miles</option>
+            <option value="150">150 miles</option>
+            <option value="9999">Any distance</option>
+          </select>
+        </label>
+        <label>Time
+          <select id="dipTime">
+            <option value="1" selected>Half a day</option>
+            <option value="2">A full day</option>
+          </select>
+        </label>
+        <button class="btn primary" data-act="dip-place">Pick a place</button>
+        <div class="dip-result" id="dipPlaceResult" hidden></div>
+      </div>
+      <div class="places-layout">
+        <div class="map-wrap">
+          <div class="map-frame" id="mapFrame"></div>
+          <div class="legend">
+            <span><i class="lg-home"></i>Home</span>
+            <span><i class="lg-pin"></i>A place</span>
+            <span><i class="lg-sel"></i>Selected</span>
+          </div>
+          <p class="map-hint">Click anywhere on the map to drop a pin — it finds the nearest postcode.</p>
+        </div>
+        <div class="places-list" id="placeList"></div>
+      </div>
+    </section>
+
+    <section id="panel-watchlist" role="tabpanel" aria-labelledby="tab-watchlist" tabindex="0" class="panel" hidden>
+      <div class="panel-head">
+        <div><h2>Films &amp; series to watch together</h2><p class="count" id="count-watch"></p></div>
+        <div class="head-actions">
+          <button class="btn ghost" data-act="dip-watch" title="Pick something at random from what you haven't watched">🎲 Lucky dip</button>
+          <button class="btn primary" data-act="add-watch">+ Add</button>
+        </div>
+      </div>
+      <div class="filters" id="watchFilters">
+        <button class="fbtn is-on" data-act="filter-watch" data-filter="all">All</button>
+        <button class="fbtn" data-act="filter-watch" data-filter="film">Films</button>
+        <button class="fbtn" data-act="filter-watch" data-filter="series">Series</button>
+        <button class="fbtn" data-act="filter-watch" data-filter="todo">To watch</button>
+        <button class="fbtn" data-act="filter-watch" data-filter="done">Watched</button>
+      </div>
+      <div class="dip-result" id="dipWatchResult" hidden></div>
+      <div class="cards" id="watchList"></div>
+    </section>
+
+    <section id="panel-holidays" role="tabpanel" aria-labelledby="tab-holidays" tabindex="0" class="panel" hidden>
+      <div class="panel-head">
+        <div><h2>Prospective holidays</h2><p class="count" id="count-holiday"></p></div>
+        <button class="btn primary" data-act="add-holiday">+ Add</button>
+      </div>
+      <div class="holiday-grid" id="holidayGrid"></div>
+    </section>
+
+    <section id="panel-calendar" role="tabpanel" aria-labelledby="tab-calendar" tabindex="0" class="panel" hidden>
+      <div class="panel-head">
+        <div><h2>Our calendar</h2><p class="count" id="count-event"></p></div>
+        <button class="btn primary" data-act="add-event">+ Add event</button>
+      </div>
+      <div class="cal-bar">
+        <button class="cal-nav" data-act="cal-prev" aria-label="Previous month">‹</button>
+        <h3 id="calLabel">—</h3>
+        <button class="cal-nav" data-act="cal-next" aria-label="Next month">›</button>
+        <button class="btn ghost tiny" data-act="cal-today">Today</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="cal-up">
+        <h4>Upcoming</h4>
+        <div id="calUpcoming"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <p id="footNote"></p>
+    <div class="foot-tools">
+      <button class="btn ghost tiny" id="exportBtn">Export data</button>
+      <button class="btn ghost tiny" id="importBtn">Import data</button>
+      <input type="file" id="importFile" accept="application/json,.json" hidden>
+    </div>
+  </footer>
+</div>
+
+<div class="modal-backdrop" id="modalBackdrop" hidden>
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal-head">
+      <h2 id="modalTitle">Add</h2>
+      <button class="icon-btn" id="modalClose" aria-label="Close">&#10005;</button>
+    </div>
+    <form class="modal-body" id="modalForm"></form>
+    <div class="modal-foot">
+      <button type="button" class="btn danger" id="modalDelete" hidden>Delete</button>
+      <button type="button" class="btn ghost" id="modalCancel">Cancel</button>
+      <button type="submit" form="modalForm" class="btn primary">Save</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+
+  // Home location — distances are measured straight-line from here.
+  // Easiest way to move it: set HOME_POSTCODE to your postcode; it is looked up on load.
+  // If the lookup is unavailable, the lat/lng below are used as a fallback.
+  var HOME_POSTCODE = "";                                  // e.g. "BD19 4AB"
+  var HOME = { name:"Gomersal", lat:53.7267, lng:-1.7019 };
+  var GEO_API = "https://api.postcodes.io";
+
+  // Shared data file. On load the page reads this (relative to the HTML) and
+  // uses it as the source of truth. Workflow: edit here -> Export data ->
+  // replace this file in your GitHub repo -> push. Set to "" to disable.
+  var DATA_URL = "data.json";
+  var COLLECTIONS = ["todos","places","watchlist","holidays","events"];
+  var CATEGORIES = ["Castle & History","Nature & Walks","City & Town","Food & Drink","Coast & Beach","Culture & Museums","Day Out","Other"];
+  var DURATIONS = ["Half day","Full day"];
+  function durRank(d){ var i = DURATIONS.indexOf(d); return i < 0 ? 0 : i + 1; }
+  var MONTHS = ["January","February","March","April","May","June","July","August","September","October","November","December"];
+  var MON_SHORT = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  var WEEKDAYS = ["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+  function pad2(n){ return (n < 10 ? "0" : "") + n; }
+  function toISODate(d){ return d.getFullYear() + "-" + pad2(d.getMonth() + 1) + "-" + pad2(d.getDate()); }
+  function parseISO(s){ var p = String(s).split("-"); return new Date(+p[0], +p[1] - 1, +p[2]); }
+  function fmtShort(iso){
+    var d = parseISO(iso);
+    return WEEKDAYS[(d.getDay() + 6) % 7] + " " + d.getDate() + " " + MON_SHORT[d.getMonth()] +
+      (d.getFullYear() !== new Date().getFullYear() ? " " + d.getFullYear() : "");
+  }
+  var PLATFORMS = ["Netflix","Disney+","Prime Video","Apple TV+","BBC iPlayer","ITVX","Channel 4","NOW / Sky","Paramount+","YouTube","Cinema","Other"];
+  var PF_COLOR = {
+    "Netflix":"#e50914","Disney+":"#1a48e0","Prime Video":"#1f9fe0","Apple TV+":"#9aa0a6",
+    "BBC iPlayer":"#e6007e","ITVX":"#f2c318","Channel 4":"#aa66cc","NOW / Sky":"#1d6fe0",
+    "Paramount+":"#0064ff","YouTube":"#ff0000","Cinema":"#c98a2b","Other":"#849390"
+  };
+
+  var _now = new Date();
+  var state = { todos:[], places:[], watchlist:[], holidays:[], events:[], selectedPlace:null, openHoliday:null, watchFilter:"all",
+                dipPlace:null, dipPlaceMiss:"", dipWatch:null, dipWatchMiss:"",
+                calYear:_now.getFullYear(), calMonthIndex:_now.getMonth() };
+  var store = null;
+  var mapSvg = null;
+  var dataJsonLoaded = false;   // true once data.json has been read successfully
+  var dirty = false;            // true when local edits differ from the loaded data.json
+
+  /* ---------- geometry ---------- */
+  var MAP = { latMin:49.8, latMax:58.9, lngMin:-8.7, lngMax:2.1, pad:30, pxPerLat:100 };
+  MAP.lngScale = MAP.pxPerLat * Math.cos((MAP.latMin + MAP.latMax) / 2 * Math.PI / 180);
+  MAP.w = (MAP.lngMax - MAP.lngMin) * MAP.lngScale + MAP.pad * 2;
+  MAP.h = (MAP.latMax - MAP.latMin) * MAP.pxPerLat + MAP.pad * 2;
+  function project(lat, lng){ return [ (lng - MAP.lngMin) * MAP.lngScale + MAP.pad, (MAP.latMax - lat) * MAP.pxPerLat + MAP.pad ]; }
+  function unproject(x, y){ return [ MAP.latMax - (y - MAP.pad) / MAP.pxPerLat, (x - MAP.pad) / MAP.lngScale + MAP.lngMin ]; }
+
+  var GB = [
+    [58.62,-3.05],[57.70,-1.98],[57.14,-2.08],[56.55,-2.50],[56.05,-2.60],[55.62,-1.72],
+    [55.17,-1.50],[54.65,-1.17],[54.28,-0.40],[54.11,-0.09],[53.58,0.15],[53.10,0.34],
+    [52.92,0.44],[52.97,1.29],[52.68,1.72],[52.09,1.62],[51.95,1.28],[51.53,0.72],
+    [51.44,0.95],[51.38,1.42],[51.13,1.33],[50.92,0.97],[50.79,0.28],[50.79,-0.10],
+    [50.73,-0.80],[50.77,-1.15],[50.71,-1.55],[50.60,-1.95],[50.52,-2.46],[50.62,-2.93],
+    [50.71,-3.53],[50.34,-3.58],[50.34,-4.14],[50.16,-4.65],[49.96,-5.20],[50.07,-5.71],
+    [50.41,-5.10],[51.02,-4.53],[51.21,-4.12],[51.24,-3.48],[51.38,-2.96],[51.40,-3.18],
+    [51.57,-3.98],[51.57,-4.35],[51.70,-5.05],[51.88,-5.31],[52.12,-4.65],[52.42,-4.09],
+    [52.82,-4.13],[52.79,-4.75],[53.15,-4.28],[53.31,-4.63],[53.33,-3.83],[53.29,-3.10],
+    [53.43,-3.18],[53.65,-3.03],[53.82,-3.06],[54.09,-2.90],[54.08,-3.24],[54.41,-3.50],
+    [54.51,-3.60],[54.87,-3.44],[54.86,-4.28],[54.64,-4.86],[54.84,-5.12],[55.24,-4.86],
+    [55.47,-4.63],[55.64,-4.81],[55.42,-5.60],[55.86,-5.42],[56.03,-5.43],[56.41,-5.47],
+    [56.71,-5.20],[56.99,-5.83],[57.28,-5.71],[57.42,-5.81],[57.58,-5.63],[57.90,-5.19],
+    [58.25,-5.38],[58.55,-4.95],[58.60,-4.40],[58.55,-3.72]
+  ];
+  var NI = [
+    [55.24,-6.49],[55.21,-6.03],[54.98,-5.72],[54.85,-5.80],[54.66,-5.66],[54.49,-5.44],
+    [54.35,-5.52],[54.22,-5.90],[54.10,-6.27],[54.20,-6.36],[54.28,-7.05],[54.60,-7.55],
+    [54.90,-7.45],[55.00,-7.31],[55.17,-6.96]
+  ];
+  var CITIES = [
+    [51.507,-0.128,"London"],[51.481,-3.179,"Cardiff"],[52.487,-1.890,"Birmingham"],
+    [53.480,-2.242,"Manchester"],[54.978,-1.618,"Newcastle"],[55.953,-3.188,"Edinburgh"],
+    [55.861,-4.251,"Glasgow"],[57.478,-4.224,"Inverness"],[54.597,-5.930,"Belfast"],
+    [52.630,1.297,"Norwich"],[50.376,-4.143,"Plymouth"]
+  ];
+
+  /* ---------- seed examples (opt-in only) ---------- */
+  var SEED = {
+    todo: [
+      { title:"Sunrise hike up a local hill", note:"Flask of coffee, back home for breakfast" },
+      { title:"Cook a full meal from a country we want to visit" },
+      { title:"Learn a song to play together" },
+      { title:"Do a pottery / life-drawing class" }
+    ],
+    place: [
+      { name:"Malham Cove", category:"Nature & Walks", duration:"Half day", postcode:"BD23 4DJ", area:"Malham, North Yorkshire", lat:54.0975, lng:-2.1547, geo:true, url:"https://en.wikipedia.org/wiki/Malham_Cove", note:"Curved limestone cliff and pavement. Steps to the top." },
+      { name:"Bamburgh Castle", category:"Castle & History", duration:"Full day", postcode:"NE69 7DF", area:"Bamburgh, Northumberland", lat:55.6083, lng:-1.7095, geo:true, url:"https://en.wikipedia.org/wiki/Bamburgh_Castle", note:"Coastal castle with a huge beach below." },
+      { name:"York", category:"City & Town", duration:"Full day", postcode:"YO1 7LZ", area:"Guildhall, York", lat:53.9590, lng:-1.0815, geo:true, url:"https://en.wikipedia.org/wiki/York", note:"City walls, the Shambles, Minster, tea rooms." },
+      { name:"Derwentwater", category:"Nature & Walks", duration:"Full day", postcode:"CA12 5DJ", area:"Keswick, Cumberland", lat:54.5772, lng:-3.1442, geo:true, url:"https://en.wikipedia.org/wiki/Derwentwater", note:"Lake District. Launch boat hops between jetties." },
+      { name:"Whitby Abbey", category:"Castle & History", duration:"Half day", postcode:"YO22 4JT", area:"Whitby, North Yorkshire", lat:54.4879, lng:-0.6076, geo:true, url:"https://en.wikipedia.org/wiki/Whitby_Abbey", note:"Clifftop ruin. Fish and chips afterwards." },
+      { name:"Formby Beach", category:"Coast & Beach", duration:"Half day", postcode:"L37 1YD", area:"Formby, Sefton", lat:53.5556, lng:-3.1078, geo:true, url:"https://en.wikipedia.org/wiki/Formby", note:"Pinewoods, dunes, red squirrels." }
+    ],
+    watch: [
+      { title:"The Bear", kind:"Series", description:"A fine-dining chef takes over his family's chaotic Chicago sandwich shop.", platforms:["Disney+"] },
+      { title:"Normal People", kind:"Series", description:"Marianne and Connell circle each other from school in Sligo to university in Dublin.", platforms:["BBC iPlayer"] },
+      { title:"Paddington 2", kind:"Film", description:"The bear in the red hat clears his name after being framed for theft. Endlessly rewatchable.", platforms:["Netflix","Prime Video"] },
+      { title:"Rye Lane", kind:"Film", description:"Two twenty-somethings spend a day walking and talking across South London after bad break-ups.", platforms:["Disney+"] },
+      { title:"Shogun", kind:"Series", description:"An English navigator is shipwrecked in feudal Japan amid a war for power.", platforms:["Disney+"] }
+    ],
+    holiday: [
+      { title:"Example: Peak District long weekend", blurb:"A short drive from home — swap in your own idea and delete this one.", stops:[
+        { place:"Castleton", highlights:"Sunset walk up Mam Tor\nPeveril Castle\nTreak Cliff Cavern (Blue John stone)" },
+        { place:"Bakewell", highlights:"Bakewell pudding from the original shop\nRiverside walk\nMonday market" },
+        { place:"Chatsworth", highlights:"House and painted hall\nGardens and maze\nFarm shop lunch" }
+      ]}
+    ]
+  };
+
+  /* ---------- editor config ---------- */
+  var EDIT = {
+    todo: { coll:"todos", noun:"thing to do", fields:[
+      { name:"title", label:"What is it?", type:"text", required:true, placeholder:"e.g. Go to a drive-in cinema" },
+      { name:"note", label:"Note (optional)", type:"textarea", placeholder:"Details, when, where…" },
+      { name:"done", type:"hiddenbool" }
+    ]},
+    place: { coll:"places", noun:"place to go", fields:[
+      { name:"name", label:"Name", type:"text", required:true, placeholder:"e.g. Fountains Abbey" },
+      { name:"category", label:"Category", type:"select", options:CATEGORIES },
+      { name:"duration", label:"Time needed", type:"select", options:["Not sure","Half day","Full day"] },
+      { name:"postcode", label:"Postcode", type:"postcode", placeholder:"e.g. HG4 3DY" },
+      { name:"url", label:"Link — what it is", type:"url", placeholder:"https://…" },
+      { name:"note", label:"Note (optional)", type:"textarea" }
+    ], hint:"Type a UK postcode and press Look up — or close this and click the map to drop a pin. The lookup needs an internet connection." },
+    watch: { coll:"watchlist", noun:"film or series", fields:[
+      { name:"title", label:"Title", type:"text", required:true },
+      { name:"kind", label:"Type", type:"select", options:["Film","Series"] },
+      { name:"image", label:"Poster (optional)", type:"image" },
+      { name:"description", label:"Short description", type:"textarea", placeholder:"A line or two about it" },
+      { name:"platforms", label:"Available on", type:"checkboxes", options:PLATFORMS },
+      { name:"watched", type:"hiddenbool" }
+    ], hint:"A poster URL keeps the file smallest. Uploaded images are shrunk to a small thumbnail." },
+    holiday: { coll:"holidays", noun:"holiday idea", fields:[
+      { name:"title", label:"Name of the trip", type:"text", required:true, placeholder:"e.g. Northern Portugal by train" },
+      { name:"blurb", label:"One-line summary", type:"textarea", placeholder:"The pitch in a sentence" },
+      { name:"stops", label:"Route & stops", type:"stops" }
+    ]},
+    event: { coll:"events", noun:"event", fields:[
+      { name:"title", label:"Event", type:"text", required:true, placeholder:"e.g. Dinner with the Smiths" },
+      { name:"date", label:"Start date", type:"date", required:true },
+      { name:"endDate", label:"End date", type:"date" },
+      { name:"allDay", label:"Full day event (no set time)", type:"checkbox" },
+      { name:"time", label:"Time", type:"time" },
+      { name:"where", label:"Where (optional)", type:"text", placeholder:"Address or place" },
+      { name:"note", label:"Note (optional)", type:"textarea" }
+    ], hint:"End date defaults to the start date — change it for a trip or multi-day event." }
+  };
+  var editorType = null, editorRec = null, editorGeo = null, editorImage = "";
+
+  /* ---------- helpers ---------- */
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return { "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]; }); }
+  function byOrder(a, b){ return (a.order || 0) - (b.order || 0) || String(a.created || "").localeCompare(String(b.created || "")); }
+  function find(n, id){ return state[n].filter(function(x){ return x.id === id; })[0]; }
+  function clone(o){ return JSON.parse(JSON.stringify(o)); }
+  function stripId(o){ var c = {}; for (var k in o) if (k !== "id") c[k] = o[k]; return c; }
+  function haversine(a, b){
+    var R = 3958.8, toR = function(x){ return x * Math.PI / 180; };
+    var dLat = toR(b.lat - a.lat), dLng = toR(b.lng - a.lng);
+    var s = Math.sin(dLat/2)*Math.sin(dLat/2) + Math.cos(toR(a.lat))*Math.cos(toR(b.lat))*Math.sin(dLng/2)*Math.sin(dLng/2);
+    return 2 * R * Math.asin(Math.sqrt(s));
+  }
+  function saveCatch(p){ if (p && p.catch) p.catch(function(err){ alert("Could not save: " + ((err && err.message) || err)); }); }
+
+  /* ---------- UK postcode lookup (postcodes.io — free, no key) ---------- */
+  var PC_RE = /^[A-Z]{1,2}\d[A-Z\d]?\s*\d[A-Z]{2}$/i;
+  function normPC(s){ return String(s || "").trim().toUpperCase().replace(/\s+/g, ""); }
+  function looksLikePostcode(s){ return PC_RE.test(String(s || "").trim()); }
+  function areaOf(r){ return [r.admin_ward, r.admin_district].filter(Boolean).join(", "); }
+
+  function geocodePostcode(pc){
+    return fetch(GEO_API + "/postcodes/" + encodeURIComponent(normPC(pc)))
+      .then(function(res){ return res.json(); })
+      .then(function(j){
+        if (j.status !== 200 || !j.result) { var e = new Error("not-found"); e.notFound = true; throw e; }
+        var r = j.result;
+        return { postcode:r.postcode, lat:r.latitude, lng:r.longitude, area:areaOf(r), geo:true };
+      });
+  }
+  function reverseGeocode(lat, lng){
+    return fetch(GEO_API + "/postcodes?lon=" + lng + "&lat=" + lat + "&limit=1&radius=2000")
+      .then(function(res){ return res.json(); })
+      .then(function(j){
+        var r = j.result && j.result[0];
+        if (!r) return null;
+        return { postcode:r.postcode, lat:r.latitude, lng:r.longitude, area:areaOf(r), geo:true };
+      });
+  }
+  function pcAutocomplete(partial){
+    return fetch(GEO_API + "/postcodes/" + encodeURIComponent(String(partial).trim()) + "/autocomplete")
+      .then(function(res){ return res.json(); })
+      .then(function(j){ return j.result || []; })
+      .catch(function(){ return []; });
+  }
+
+  /* ---------- storage ---------- */
+  function lsKey(n){ return "uslist:" + n; }
+  function loadLocal(n){ try { return (JSON.parse(localStorage.getItem(lsKey(n)) || "[]") || []).sort(byOrder); } catch (e) { return []; } }
+  function saveLocal(n){ try { localStorage.setItem(lsKey(n), JSON.stringify(state[n])); } catch (e) {} }
+  function newId(){ return "l" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+
+  function markDirty(){ if (!dirty) { dirty = true; updateFootNote(); } }
+
+  function localStore(){
+    return {
+      add: function(n, d){
+        state[n] = state[n].concat([ Object.assign({ id:newId(), order:Date.now(), created:new Date().toISOString() }, d) ]);
+        saveLocal(n); renderTab(n); markDirty(); return Promise.resolve();
+      },
+      update: function(n, id, d){
+        state[n] = state[n].map(function(x){ return x.id === id ? Object.assign({}, x, d) : x; });
+        saveLocal(n); renderTab(n); markDirty(); return Promise.resolve();
+      },
+      remove: function(n, id){
+        state[n] = state[n].filter(function(x){ return x.id !== id; });
+        saveLocal(n); renderTab(n); markDirty(); return Promise.resolve();
+      }
+    };
+  }
+  function patch(coll, item, changes){ return store.update(coll, item.id, Object.assign(stripId(item), changes)); }
+
+  function initStore(){
+    store = localStore();
+    COLLECTIONS.forEach(function(n){ state[n] = loadLocal(n); renderTab(n); });
+    var el = document.getElementById("footNote");
+    if (el && DATA_URL) el.textContent = "Checking for data.json…";
+    loadDataJson();
+  }
+  function loadDataJson(){
+    if (!DATA_URL) { updateFootNote(); return; }
+    fetch(DATA_URL + (DATA_URL.indexOf("?") < 0 ? "?" : "&") + "t=" + Date.now(), { cache: "no-store" })
+      .then(function(res){ if (!res.ok) throw new Error("http " + res.status); return res.json(); })
+      .then(function(data){
+        if (!data || typeof data !== "object" || !COLLECTIONS.some(function(n){ return Array.isArray(data[n]); })) {
+          throw new Error("not a Us List file");
+        }
+        COLLECTIONS.forEach(function(n){
+          state[n] = (Array.isArray(data[n]) ? data[n].slice() : []).sort(byOrder);
+          saveLocal(n); renderTab(n);
+        });
+        dataJsonLoaded = true;
+        dirty = false;
+        updateFootNote();
+      })
+      .catch(function(){ dataJsonLoaded = false; updateFootNote(); });
+  }
+  function updateFootNote(){
+    var el = document.getElementById("footNote");
+    var btn = document.getElementById("exportBtn");
+    var msg;
+    if (dataJsonLoaded) {
+      msg = dirty
+        ? "● Unsaved changes. Your edits are only in this browser — press Export data, then replace data.json in your GitHub repo and push."
+        : "Loaded from data.json on the server. Edits made here are temporary until you Export data and push a new data.json to GitHub.";
+    } else {
+      msg = "Saved in this browser only (data.json was not found). Use Export / Import to move your data.";
+    }
+    if (el) el.textContent = msg + "  Distances are straight-line from home (" + (HOME.name || "set HOME_POSTCODE in the file") + ").";
+    if (btn) { btn.classList.toggle("primary", dirty); btn.classList.toggle("ghost", !dirty); }
+  }
+  function resolveHome(){
+    if (!HOME_POSTCODE) return;
+    geocodePostcode(HOME_POSTCODE).then(function(g){
+      HOME.lat = g.lat; HOME.lng = g.lng;
+      HOME.name = g.postcode + (g.area ? " · " + g.area : "");
+      updateFootNote();
+      buildMap();
+      renderPlaces();
+    }, function(){ /* keep the fallback lat/lng */ });
+  }
+
+  function exportData(){
+    var out = { app:"the-us-list", exported:new Date().toISOString() };
+    COLLECTIONS.forEach(function(n){ out[n] = state[n]; });
+    var blob = new Blob([JSON.stringify(out, null, 2)], { type:"application/json" });
+    var url = URL.createObjectURL(blob);
+    var a = document.createElement("a");
+    a.href = url; a.download = "data.json";
+    document.body.appendChild(a); a.click(); a.remove();
+    setTimeout(function(){ URL.revokeObjectURL(url); }, 1000);
+    if (dataJsonLoaded) { dirty = false; updateFootNote(); }
+  }
+  function importData(file){
+    var r = new FileReader();
+    r.onload = function(){
+      var data;
+      try { data = JSON.parse(r.result); } catch (e) { alert("That file isn't valid JSON."); return; }
+      if (!COLLECTIONS.some(function(n){ return Array.isArray(data[n]); })) { alert("No Us List data found in that file."); return; }
+      if (!window.confirm("Replace everything currently saved in this browser with the contents of this file?")) return;
+      COLLECTIONS.forEach(function(n){
+        state[n] = Array.isArray(data[n]) ? data[n].slice().sort(byOrder) : [];
+        saveLocal(n); renderTab(n);
+      });
+      if (dataJsonLoaded) { dirty = true; }
+      updateFootNote();
+    };
+    r.readAsText(file);
+  }
+
+  /* ---------- map ---------- */
+  function pathFrom(pts){
+    return pts.map(function(p, i){ var xy = project(p[0], p[1]); return (i ? "L" : "M") + xy[0].toFixed(1) + "," + xy[1].toFixed(1); }).join(" ") + " Z";
+  }
+  function buildMap(){
+    var frame = document.getElementById("mapFrame");
+    if (!frame) return;
+    frame.innerHTML = "";
+    var NS = "http://www.w3.org/2000/svg";
+    var svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("viewBox", "0 0 " + MAP.w.toFixed(0) + " " + MAP.h.toFixed(0));
+    svg.setAttribute("role", "img");
+    svg.setAttribute("aria-label", "Map of the United Kingdom showing saved places");
+    var g = '<rect class="sea" x="0" y="0" width="' + MAP.w.toFixed(0) + '" height="' + MAP.h.toFixed(0) + '"/>';
+    var lat, lng, xy;
+    for (lat = 50; lat <= 58; lat += 2) { xy = project(lat, 0); g += '<line class="grat" x1="0" y1="' + xy[1].toFixed(1) + '" x2="' + MAP.w.toFixed(0) + '" y2="' + xy[1].toFixed(1) + '"/>'; }
+    for (lng = -8; lng <= 2; lng += 2) { xy = project(54, lng); g += '<line class="grat" x1="' + xy[0].toFixed(1) + '" y1="0" x2="' + xy[0].toFixed(1) + '" y2="' + MAP.h.toFixed(0) + '"/>'; }
+    g += '<path class="land" d="' + pathFrom(GB) + '"/>';
+    g += '<path class="land" d="' + pathFrom(NI) + '"/>';
+    CITIES.forEach(function(c){
+      var p = project(c[0], c[1]);
+      g += '<circle class="cty" cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="2.4"/>';
+      g += '<text class="cty-t" x="' + (p[0] + 4).toFixed(1) + '" y="' + (p[1] + 3).toFixed(1) + '">' + c[2] + '</text>';
+    });
+    var h = project(HOME.lat, HOME.lng);
+    g += '<g transform="translate(' + h[0].toFixed(1) + ',' + h[1].toFixed(1) + ')">' +
+         '<rect class="home-m" x="-5" y="-5" width="10" height="10" transform="rotate(45)"/>' +
+         '<text class="home-t" x="-9" y="3.5">Home</text></g>';
+    g += '<g id="pins"></g>';
+    svg.innerHTML = g;
+    frame.appendChild(svg);
+    svg.addEventListener("click", onMapClick);
+    svg.addEventListener("keydown", function(e){
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var pin = e.target.closest && e.target.closest(".pin");
+      if (pin) { e.preventDefault(); selectPlace(pin.getAttribute("data-id"), { fromMap:true }); }
+    });
+    mapSvg = svg;
+  }
+  function onMapClick(e){
+    var pin = e.target.closest && e.target.closest(".pin");
+    if (pin) { selectPlace(pin.getAttribute("data-id"), { fromMap:true }); return; }
+    if (!mapSvg.getScreenCTM) return;
+    var m = mapSvg.getScreenCTM(); if (!m) return;
+    var pt = mapSvg.createSVGPoint(); pt.x = e.clientX; pt.y = e.clientY;
+    var loc = pt.matrixTransform(m.inverse());
+    var ll = unproject(loc.x, loc.y), la = +ll[0].toFixed(4), lo = +ll[1].toFixed(4);
+    if (la < MAP.latMin || la > MAP.latMax || lo < MAP.lngMin || lo > MAP.lngMax) return;
+    var dropRaw = function(){
+      if (window.confirm("Drop the pin at this exact spot without a postcode?")) openEditor("place", { lat: la, lng: lo, area: "", geo: true });
+    };
+    reverseGeocode(la, lo).then(function(g){
+      if (g) openEditor("place", g);
+      else dropRaw();
+    }, dropRaw);
+  }
+  function renderPins(){
+    var g = document.getElementById("pins");
+    if (!g) return;
+    g.innerHTML = state.places.filter(function(p){ return isFinite(p.lat) && isFinite(p.lng); }).map(function(p){
+      var xy = project(+p.lat, +p.lng), sel = state.selectedPlace === p.id;
+      var d = haversine(HOME, { lat:+p.lat, lng:+p.lng });
+      var tf = sel ? "translate(" + xy[0].toFixed(1) + "," + xy[1].toFixed(1) + ") scale(1.18)" : "translate(" + xy[0].toFixed(1) + "," + xy[1].toFixed(1) + ")";
+      return '<g class="pin' + (sel ? " is-sel" : "") + '" data-id="' + p.id + '" transform="' + tf + '" tabindex="0" role="button" aria-label="' + esc(p.name) + ', ' + Math.round(d) + ' miles from home">' +
+        '<title>' + esc(p.name) + " — " + Math.round(d) + ' mi</title>' +
+        (sel ? '<circle class="pin-ring" cx="0" cy="-21" r="12"/>' : "") +
+        '<path class="pin-shape" d="M0,0 C-6,-10 -9,-15 -9,-21 A9,9 0 1,1 9,-21 C9,-15 6,-10 0,0 Z"/>' +
+        '<circle class="pin-dot" cx="0" cy="-21" r="3.3"/></g>';
+    }).join("");
+  }
+  function selectPlace(id, opts){
+    opts = opts || {};
+    state.selectedPlace = (state.selectedPlace === id && !opts.fromMap) ? null : id;
+    renderPlaces();
+    if (opts.fromMap && state.selectedPlace) {
+      var card = document.querySelector('.place-card[data-id="' + id + '"]');
+      if (card) card.scrollIntoView({ behavior:"smooth", block:"center" });
+    }
+  }
+
+  /* ---------- render ---------- */
+  var EMPTY = {
+    todos:   ["✦", "No plans yet", "Add the first thing the two of you want to do together.", "todo", "Add a plan"],
+    places:  ["◉", "No places pinned", "Add somewhere in the UK you both want to visit — or click the map to drop a pin.", "place", "Add a place"],
+    watchlist:["▤", "Watchlist is empty", "Add a film or series, what it’s about, and where to stream it.", "watch", "Add a title"],
+    holidays:["✈", "No holiday ideas yet", "Add a trip idea. Each one holds a route, its stops, and the best things to do at each.", "holiday", "Add an idea"]
+  };
+  function emptyState(coll){
+    var e = EMPTY[coll];
+    return '<div class="empty"><div class="em-ic">' + e[0] + '</div><h3>' + e[1] + '</h3><p>' + e[2] + '</p>' +
+      '<button class="btn primary" data-act="add-' + e[3] + '">+ ' + e[4] + '</button>' +
+      '<button class="btn ghost" data-act="seed-' + e[3] + '">' + (coll === "holidays" ? "Add a template" : "Add examples") + '</button></div>';
+  }
+  function setCount(id, txt){ var el = document.getElementById(id); if (el) el.textContent = txt || ""; }
+
+  function renderTab(name){
+    ({ todos:renderTodos, places:renderPlaces, watchlist:renderWatch, holidays:renderHolidays, events:renderCalendar }[name] || function(){})();
+  }
+
+  function renderTodos(){
+    var wrap = document.getElementById("todoList");
+    if (!wrap) return;
+    var items = state.todos, done = items.filter(function(i){ return i.done; }).length;
+    setCount("count-todo", items.length ? done + " done · " + items.length + " total" : "");
+    if (!items.length) { wrap.innerHTML = "<li>" + emptyState("todos") + "</li>"; return; }
+    wrap.innerHTML = items.map(function(i){
+      return '<li class="row' + (i.done ? " is-done" : "") + '">' +
+        '<button class="check" data-act="toggle-todo" data-id="' + i.id + '" aria-pressed="' + !!i.done + '" aria-label="Mark done">' + (i.done ? "✓" : "") + '</button>' +
+        '<div class="row-main"><p class="row-title">' + esc(i.title) + '</p>' + (i.note ? '<p class="row-note">' + esc(i.note) + '</p>' : "") + '</div>' +
+        '<div class="row-actions">' +
+          '<button class="icon-btn" data-act="edit-todo" data-id="' + i.id + '" aria-label="Edit">✎</button>' +
+          '<button class="icon-btn" data-act="del-todo" data-id="' + i.id + '" aria-label="Delete">✕</button>' +
+        '</div></li>';
+    }).join("");
+  }
+
+  function renderPlaces(){
+    renderPins();
+    renderDipPlace();
+    var list = document.getElementById("placeList");
+    if (!list) return;
+    var items = state.places;
+    setCount("count-place", items.length ? items.length + " saved" : "");
+    if (!items.length) { list.innerHTML = emptyState("places"); return; }
+    list.innerHTML = items.map(function(p){
+      var has = isFinite(p.lat) && isFinite(p.lng);
+      var d = has ? haversine(HOME, { lat:+p.lat, lng:+p.lng }) : null;
+      var sel = state.selectedPlace === p.id;
+      var loc = p.postcode ? (esc(p.postcode) + (p.area ? ' · ' + esc(p.area) : '')) : (has ? 'Pinned on the map' : '');
+      var durChip = (p.duration && p.duration !== "Not sure") ? '<span class="chip alt">' + esc(p.duration) + '</span>' : '';
+      return '<article class="place-card' + (sel ? " is-sel" : "") + '" data-act="select-place" data-id="' + p.id + '" tabindex="0">' +
+        '<div class="place-top"><h3>' + esc(p.name) + '</h3><span class="chips"><span class="chip">' + esc(p.category || "Place") + '</span>' + durChip + '</span></div>' +
+        (loc ? '<p class="place-loc">' + loc + '</p>' : '') +
+        (has ? '<p class="dist"><b>' + (d < 10 ? d.toFixed(1) : Math.round(d)) + '</b> mi<span class="sub"> · ' + Math.round(d * 1.609) + ' km, as the crow flies</span></p>' : '<p class="dist sub">No map location — edit to add a postcode</p>') +
+        (p.note ? '<p class="place-note">' + esc(p.note) + '</p>' : "") +
+        '<div class="place-foot">' +
+          (p.url ? '<a class="link" href="' + esc(p.url) + '" target="_blank" rel="noopener">What it is ↗</a>' : '<span></span>') +
+          '<span class="place-actions">' +
+            '<button class="icon-btn" data-act="edit-place" data-id="' + p.id + '" aria-label="Edit">✎</button>' +
+            '<button class="icon-btn" data-act="del-place" data-id="' + p.id + '" aria-label="Delete">✕</button>' +
+          '</span>' +
+        '</div></article>';
+    }).join("");
+  }
+
+  function renderWatch(){
+    var wrap = document.getElementById("watchList");
+    if (!wrap) return;
+    var all = state.watchlist, f = state.watchFilter;
+    var watched = all.filter(function(i){ return i.watched; }).length;
+    setCount("count-watch", all.length ? watched + " watched · " + all.length + " total" : "");
+    renderDipWatch();
+    [].forEach.call(document.querySelectorAll('#watchFilters .fbtn'), function(b){
+      b.classList.toggle("is-on", b.getAttribute("data-filter") === f);
+    });
+    if (!all.length) { wrap.innerHTML = emptyState("watchlist"); return; }
+    var items = all.filter(function(i){
+      if (f === "film") return i.kind === "Film";
+      if (f === "series") return i.kind === "Series";
+      if (f === "todo") return !i.watched;
+      if (f === "done") return !!i.watched;
+      return true;
+    });
+    if (!items.length) { wrap.innerHTML = '<p class="muted pad">Nothing matches this filter.</p>'; return; }
+    wrap.innerHTML = items.map(function(i){
+      var pf = (i.platforms || []).map(function(pl){
+        return '<span class="pf"><i style="background:' + (PF_COLOR[pl] || "#849390") + '"></i>' + esc(pl) + '</span>';
+      }).join("") || '<span class="muted sm">No platform noted</span>';
+      var poster = i.image ? '<img class="watch-poster" src="' + esc(i.image) + '" alt="" loading="lazy" onerror="this.remove()">' : "";
+      return '<article class="watch-card' + (i.watched ? " is-done" : "") + '">' +
+        '<div class="watch-body">' + poster + '<div class="watch-text">' +
+          '<div class="watch-head"><h3>' + esc(i.title) + '</h3><span class="chip">' + esc(i.kind || "Title") + '</span></div>' +
+          (i.description ? '<p class="watch-desc">' + esc(i.description) + '</p>' : "") +
+        '</div></div>' +
+        '<div class="platforms">' + pf + '</div>' +
+        '<div class="watch-foot">' +
+          '<button class="btn tiny ' + (i.watched ? "ghost" : "soft") + '" data-act="toggle-watch" data-id="' + i.id + '">' + (i.watched ? "✓ Watched" : "Mark watched") + '</button>' +
+          '<span class="place-actions">' +
+            '<button class="icon-btn" data-act="edit-watch" data-id="' + i.id + '" aria-label="Edit">✎</button>' +
+            '<button class="icon-btn" data-act="del-watch" data-id="' + i.id + '" aria-label="Delete">✕</button>' +
+          '</span>' +
+        '</div></article>';
+    }).join("");
+  }
+
+  /* ---------- lucky dip ---------- */
+  function doDipPlace(){
+    var de = document.getElementById("dipDist"), te = document.getElementById("dipTime");
+    var limit = de ? (+de.value || 9999) : 9999;
+    var timeR = te ? (+te.value || 2) : 2;
+    var pool = state.places.filter(function(p){
+      if (!(isFinite(p.lat) && isFinite(p.lng))) return false;
+      if (haversine(HOME, { lat:+p.lat, lng:+p.lng }) > limit) return false;
+      if (durRank(p.duration) > timeR) return false;
+      return true;
+    });
+    if (state.dipPlace && pool.length > 1) pool = pool.filter(function(p){ return p.id !== state.dipPlace; });
+    if (!pool.length) {
+      state.dipPlace = null;
+      state.dipPlaceMiss = "Nothing on your list fits that yet. Try a longer distance or more time — or add more places.";
+    } else {
+      state.dipPlace = pool[Math.floor(Math.random() * pool.length)].id;
+      state.dipPlaceMiss = "";
+    }
+    renderDipPlace();
+  }
+  function renderDipPlace(){
+    var box = document.getElementById("dipPlaceResult");
+    if (!box) return;
+    if (state.dipPlaceMiss) {
+      box.hidden = false;
+      box.innerHTML = '<div class="dip-hit"><div class="dip-hit-main"><p class="dip-kicker">Lucky dip</p>' +
+        '<p class="dip-note">' + esc(state.dipPlaceMiss) + '</p></div>' +
+        '<div class="dip-hit-actions"><button class="btn ghost tiny" data-act="dip-clear-place">Dismiss</button></div></div>';
+      return;
+    }
+    var p = state.dipPlace ? find("places", state.dipPlace) : null;
+    if (!p) { box.hidden = true; box.innerHTML = ""; return; }
+    box.hidden = false;
+    var has = isFinite(p.lat) && isFinite(p.lng);
+    var d = has ? haversine(HOME, { lat:+p.lat, lng:+p.lng }) : null;
+    box.innerHTML = '<div class="dip-hit"><div class="dip-hit-main">' +
+      '<p class="dip-kicker">Your lucky dip</p><h4>' + esc(p.name) + '</h4>' +
+      '<p class="dip-meta">' +
+        (d != null ? '<b>' + (d < 10 ? d.toFixed(1) : Math.round(d)) + '</b> mi · ' : '') +
+        esc(p.category || "Place") +
+        (p.duration && p.duration !== "Not sure" ? ' · ' + esc(p.duration) : '') +
+      '</p>' +
+      (p.note ? '<p class="dip-note">' + esc(p.note) + '</p>' : '') +
+      '</div><div class="dip-hit-actions">' +
+        (p.url ? '<a class="link" href="' + esc(p.url) + '" target="_blank" rel="noopener">What it is ↗</a>' : '') +
+        (has ? '<button class="btn ghost tiny" data-act="dip-show" data-id="' + p.id + '">Show on map</button>' : '') +
+        '<button class="btn ghost tiny" data-act="dip-place">Pick another</button>' +
+        '<button class="btn ghost tiny" data-act="dip-clear-place">Dismiss</button>' +
+      '</div></div>';
+  }
+  function doDipWatch(){
+    var pool = state.watchlist.filter(function(i){ return !i.watched; });
+    if (!pool.length) pool = state.watchlist.slice();
+    if (state.dipWatch && pool.length > 1) pool = pool.filter(function(i){ return i.id !== state.dipWatch; });
+    if (!pool.length) {
+      state.dipWatch = null;
+      state.dipWatchMiss = "Your watchlist is empty — add something first.";
+    } else {
+      state.dipWatch = pool[Math.floor(Math.random() * pool.length)].id;
+      state.dipWatchMiss = "";
+    }
+    renderDipWatch();
+  }
+  function renderDipWatch(){
+    var box = document.getElementById("dipWatchResult");
+    if (!box) return;
+    if (state.dipWatchMiss) {
+      box.hidden = false;
+      box.innerHTML = '<div class="dip-hit"><div class="dip-hit-main"><p class="dip-kicker">Lucky dip</p>' +
+        '<p class="dip-note">' + esc(state.dipWatchMiss) + '</p></div>' +
+        '<div class="dip-hit-actions"><button class="btn ghost tiny" data-act="dip-clear-watch">Dismiss</button></div></div>';
+      return;
+    }
+    var i = state.dipWatch ? find("watchlist", state.dipWatch) : null;
+    if (!i) { box.hidden = true; box.innerHTML = ""; return; }
+    box.hidden = false;
+    var pf = (i.platforms || []).map(function(pl){
+      return '<span class="pf"><i style="background:' + (PF_COLOR[pl] || "#849390") + '"></i>' + esc(pl) + '</span>';
+    }).join("");
+    var poster = i.image ? '<img class="dip-poster" src="' + esc(i.image) + '" alt="" onerror="this.remove()">' : "";
+    box.innerHTML = '<div class="dip-hit">' + poster + '<div class="dip-hit-main">' +
+      '<p class="dip-kicker">Your lucky dip</p>' +
+      '<h4>' + esc(i.title) + (i.watched ? ' <span class="chip">seen it</span>' : '') + '</h4>' +
+      '<p class="dip-meta">' + esc(i.kind || "Title") + '</p>' +
+      (i.description ? '<p class="dip-note">' + esc(i.description) + '</p>' : '') +
+      (pf ? '<div class="platforms">' + pf + '</div>' : '') +
+      '</div><div class="dip-hit-actions">' +
+        '<button class="btn ghost tiny" data-act="toggle-watch" data-id="' + i.id + '">' + (i.watched ? "✓ Watched" : "Mark watched") + '</button>' +
+        '<button class="btn ghost tiny" data-act="dip-watch">Pick another</button>' +
+        '<button class="btn ghost tiny" data-act="dip-clear-watch">Dismiss</button>' +
+      '</div></div>';
+  }
+
+  /* ---------- calendar ---------- */
+  function renderCalendar(){
+    var grid = document.getElementById("calGrid");
+    var label = document.getElementById("calLabel");
+    var upWrap = document.getElementById("calUpcoming");
+    if (!grid) return;
+    var y = state.calYear, m = state.calMonthIndex;
+    if (label) label.textContent = MONTHS[m] + " " + y;
+
+    var byDate = {};
+    state.events.forEach(function(e){
+      if (!e || !e.date) return;
+      var cur = parseISO(e.date), end = parseISO(evEnd(e)), guard = 0;
+      while (cur <= end && guard < 400) {
+        var k = toISODate(cur);
+        (byDate[k] = byDate[k] || []).push(e);
+        cur.setDate(cur.getDate() + 1);
+        guard++;
+      }
+    });
+    Object.keys(byDate).forEach(function(k){
+      byDate[k].sort(function(a, b){
+        return (a.allDay ? "" : (a.time || "")).localeCompare(b.allDay ? "" : (b.time || ""));
+      });
+    });
+
+    var todayIso = toISODate(new Date());
+    var first = new Date(y, m, 1);
+    var offset = (first.getDay() + 6) % 7;
+    var start = new Date(y, m, 1 - offset);
+
+    var html = WEEKDAYS.map(function(d){ return '<div class="cal-head">' + d + '</div>'; }).join("");
+    for (var i = 0; i < 42; i++) {
+      var cur = new Date(start.getFullYear(), start.getMonth(), start.getDate() + i);
+      var iso = toISODate(cur);
+      var out = cur.getMonth() !== m;
+      var evs = byDate[iso] || [];
+      html += '<div class="cal-cell' + (out ? " out" : "") + (iso === todayIso ? " is-today" : "") +
+        '" data-act="add-event" data-date="' + iso + '" role="button" tabindex="0" aria-label="' + iso + ', ' + evs.length + ' event' + (evs.length === 1 ? "" : "s") + '">' +
+        '<span class="cal-daynum">' + cur.getDate() + '</span>' +
+        evs.map(function(e){
+          var multi = evEnd(e) > e.date;
+          var cont = multi && e.date !== iso;
+          var tip = esc(e.title) + (multi ? " (" + fmtShort(e.date) + " – " + fmtShort(evEnd(e)) + ")" : (e.allDay ? " · all day" : (e.time ? " · " + esc(e.time) : "")));
+          var lead = cont ? "↳ " : (e.allDay || multi ? "" : (e.time ? '<b>' + esc(e.time) + '</b> ' : ''));
+          return '<button type="button" class="cal-ev' + (multi ? " span" : "") + '" data-act="edit-event" data-id="' + e.id + '" title="' + tip + '">' +
+            lead + esc(e.title) + '</button>';
+        }).join("") +
+        '</div>';
+    }
+    grid.innerHTML = html;
+
+    var up = state.events.filter(function(e){ return e && e.date && evEnd(e) >= todayIso; }).sort(function(a, b){
+      return a.date === b.date ? (a.time || "").localeCompare(b.time || "") : a.date.localeCompare(b.date);
+    });
+    setCount("count-event", up.length ? up.length + " upcoming" : "");
+    if (upWrap) {
+      upWrap.innerHTML = up.length ? up.slice(0, 15).map(function(e){
+        var multi = evEnd(e) > e.date;
+        var when = multi ? (fmtShort(e.date) + " – " + fmtShort(evEnd(e))) : fmtShort(e.date);
+        var sub = [e.allDay ? "All day" : (e.time || ""), e.where ? esc(e.where) : ""].filter(Boolean).join(" · ");
+        return '<div class="cal-up-row" data-act="edit-event" data-id="' + e.id + '" tabindex="0">' +
+          '<span class="cal-up-date">' + when + '</span>' +
+          '<span class="cal-up-main"><span class="cal-up-title">' + esc(e.title) + '</span>' +
+          (sub ? '<span class="cal-up-sub">' + sub + '</span>' : '') + '</span></div>';
+      }).join("") : '<p class="muted sm">Nothing scheduled yet. Click a day above, or use the “+ Add event” button.</p>';
+    }
+  }
+  function evEnd(e){ return (e.endDate && e.endDate >= e.date) ? e.endDate : e.date; }
+  function stepMonth(delta){
+    var mm = state.calMonthIndex + delta;
+    state.calYear += Math.floor(mm / 12);
+    state.calMonthIndex = ((mm % 12) + 12) % 12;
+    renderCalendar();
+  }
+
+  function highlightList(txt){
+    if (!txt) return '<p class="muted sm">No notes yet — add the key things to do and see.</p>';
+    var parts = String(txt).split(/\n|;/).map(function(s){ return s.trim(); }).filter(Boolean);
+    if (parts.length <= 1) return "<p>" + esc(txt) + "</p>";
+    return "<ul>" + parts.map(function(p){ return "<li>" + esc(p) + "</li>"; }).join("") + "</ul>";
+  }
+  function renderHolidays(){
+    var wrap = document.getElementById("holidayGrid");
+    if (!wrap) return;
+    var items = state.holidays;
+    setCount("count-holiday", items.length ? items.length + " idea" + (items.length > 1 ? "s" : "") : "");
+    if (!items.length) { wrap.innerHTML = emptyState("holidays"); return; }
+    wrap.innerHTML = items.map(function(h){
+      var open = state.openHoliday === h.id;
+      var stops = Array.isArray(h.stops) ? h.stops : [];
+      var route = stops.map(function(s){ return esc(s.place || "—"); }).join(' <span class="arr">→</span> ') || '<span class="muted">No route yet</span>';
+      var body = "";
+      if (open) {
+        var line = stops.map(function(s, idx){
+          return '<span class="route-stop"><span class="route-num">' + (idx + 1) + '</span>' + esc(s.place || "—") + '</span>';
+        }).join('<span class="route-dash"></span>');
+        var details = stops.map(function(s, idx){
+          return '<section class="stop-detail"><h4><span class="route-num sm">' + (idx + 1) + '</span>' + esc(s.place || ("Stop " + (idx + 1))) + '</h4>' + highlightList(s.highlights) + '</section>';
+        }).join("");
+        body = '<div class="holiday-body">' +
+          (stops.length ? '<div class="route-line">' + line + '</div>' : '<p class="muted sm" style="padding:8px 0">No stops added yet.</p>') +
+          (details ? '<div class="stop-details">' + details + '</div>' : "") +
+          '<div class="holiday-actions">' +
+            '<button class="icon-btn" data-act="edit-holiday" data-id="' + h.id + '">✎ Edit</button>' +
+            '<button class="icon-btn" data-act="del-holiday" data-id="' + h.id + '">✕ Delete</button>' +
+          '</div></div>';
+      }
+      return '<article class="holiday-card' + (open ? " is-open" : "") + '">' +
+        '<button type="button" class="holiday-face" data-act="toggle-holiday" data-id="' + h.id + '" aria-expanded="' + open + '">' +
+          '<span class="holiday-face-main"><span class="holiday-title">' + esc(h.title) + '</span>' +
+            (h.blurb ? '<span class="holiday-blurb">' + esc(h.blurb) + '</span>' : "") +
+            '<span class="holiday-route">' + route + '</span></span>' +
+          '<span class="holiday-meta"><span class="chip">' + stops.length + ' stop' + (stops.length === 1 ? "" : "s") + '</span><span class="chev" aria-hidden="true">▾</span></span>' +
+        '</button>' + body + '</article>';
+    }).join("");
+  }
+
+  /* ---------- editor modal ---------- */
+  function fieldHTML(f, rec){
+    var v = rec ? rec[f.name] : undefined;
+    if (f.type === "hiddenbool") return "";
+    if (f.type === "text" || f.type === "url" || f.type === "number" || f.type === "date" || f.type === "time") {
+      return '<div class="field"><label for="f_' + f.name + '">' + f.label + (f.required ? " *" : "") + '</label>' +
+        '<input id="f_' + f.name + '" name="' + f.name + '" type="' + f.type + '"' +
+        (f.type === "number" ? ' step="any" inputmode="decimal"' : "") +
+        (f.required ? " required" : "") +
+        ' value="' + (v == null ? "" : esc(v)) + '" placeholder="' + (f.placeholder || "") + '"></div>';
+    }
+    if (f.type === "textarea") {
+      return '<div class="field"><label for="f_' + f.name + '">' + f.label + '</label>' +
+        '<textarea id="f_' + f.name + '" name="' + f.name + '" placeholder="' + (f.placeholder || "") + '">' + (v == null ? "" : esc(v)) + '</textarea></div>';
+    }
+    if (f.type === "select") {
+      return '<div class="field"><label for="f_' + f.name + '">' + f.label + '</label><select id="f_' + f.name + '" name="' + f.name + '">' +
+        f.options.map(function(o){ return '<option' + (v === o ? " selected" : "") + '>' + o + '</option>'; }).join("") + '</select></div>';
+    }
+    if (f.type === "checkbox") {
+      return '<div class="field"><label class="chk"><input type="checkbox" id="f_' + f.name + '" name="' + f.name + '"' + (v ? " checked" : "") + '> ' + f.label + '</label></div>';
+    }
+    if (f.type === "image") {
+      return '<div class="field"><label for="f_image">' + f.label + '</label>' +
+        '<div class="img-row">' +
+          '<div class="img-prev" id="imgPrev"></div>' +
+          '<div class="img-ctl">' +
+            '<input id="f_image" name="image" type="text" autocomplete="off" placeholder="Paste an image URL…">' +
+            '<div class="img-btns">' +
+              '<button type="button" class="btn ghost tiny" id="imgUpload">Upload…</button>' +
+              '<button type="button" class="btn ghost tiny" id="imgClear">Clear</button>' +
+            '</div>' +
+            '<input type="file" id="imgFile" accept="image/*" hidden>' +
+          '</div>' +
+        '</div></div>';
+    }
+    if (f.type === "checkboxes") {
+      return '<div class="field"><label>' + f.label + '</label><div class="checks">' +
+        f.options.map(function(o){
+          return '<label><input type="checkbox" name="' + f.name + '" value="' + esc(o) + '"' + ((v || []).indexOf(o) > -1 ? " checked" : "") + '>' + esc(o) + '</label>';
+        }).join("") + '</div></div>';
+    }
+    if (f.type === "postcode") {
+      return '<div class="field"><label for="f_postcode">' + f.label + '</label>' +
+        '<div class="pc-row">' +
+          '<input id="f_postcode" name="postcode" type="text" autocomplete="off" list="pcSuggest" ' +
+          'value="' + (v == null ? "" : esc(v)) + '" placeholder="' + (f.placeholder || "") + '">' +
+          '<button type="button" class="btn ghost tiny" id="pcLookup">Look up</button>' +
+        '</div>' +
+        '<datalist id="pcSuggest"></datalist>' +
+        '<p class="pc-status" id="pcStatus" aria-live="polite"></p></div>';
+    }
+    if (f.type === "stops") {
+      return '<div class="field"><label>' + f.label + '</label><div id="stopsWrap"></div>' +
+        '<button type="button" class="btn ghost tiny" id="addStop" style="align-self:flex-start">+ Add stop</button></div>';
+    }
+    return "";
+  }
+  function stopRow(s){
+    var d = document.createElement("div");
+    d.className = "stop-row";
+    d.innerHTML = '<div class="srow-top"><input type="text" class="stop-place" placeholder="Place (e.g. Kyoto)" value="' + esc(s.place || "") + '">' +
+      '<button type="button" class="icon-btn del-stop" aria-label="Remove stop">✕</button></div>' +
+      '<textarea class="stop-hl" placeholder="Key things to do & see — one per line">' + esc(s.highlights || "") + '</textarea>';
+    d.querySelector(".del-stop").addEventListener("click", function(){
+      var w = document.getElementById("stopsWrap");
+      if (w && w.children.length > 1) d.remove();
+    });
+    return d;
+  }
+  function initStops(rec){
+    var wrap = document.getElementById("stopsWrap");
+    if (!wrap) return;
+    wrap.innerHTML = "";
+    var stops = (rec && Array.isArray(rec.stops) && rec.stops.length) ? rec.stops : [{ place:"", highlights:"" }];
+    stops.forEach(function(s){ wrap.appendChild(stopRow(s)); });
+    document.getElementById("addStop").addEventListener("click", function(){ wrap.appendChild(stopRow({ place:"", highlights:"" })); });
+  }
+  function setPcStatus(msg, cls){
+    var el = document.getElementById("pcStatus");
+    if (!el) return;
+    el.textContent = msg || "";
+    el.className = "pc-status" + (cls ? " " + cls : "");
+  }
+  function doLookup(){
+    var inp = document.getElementById("f_postcode");
+    if (!inp) return;
+    var raw = inp.value.trim();
+    if (!raw) { editorGeo = null; setPcStatus(""); return; }
+    if (!looksLikePostcode(raw)) { setPcStatus("That doesn't look like a full UK postcode yet.", "bad"); return; }
+    setPcStatus("Looking up…");
+    geocodePostcode(raw).then(function(g){
+      editorGeo = g;
+      inp.value = g.postcode;
+      setPcStatus("✓ " + g.postcode + (g.area ? " · " + g.area : ""), "ok");
+    }, function(err){
+      editorGeo = null;
+      setPcStatus(err && err.notFound ? "✗ No match for that postcode." : "✗ Couldn't reach the lookup — check your connection.", "bad");
+    });
+  }
+  function initPostcode(rec){
+    editorGeo = null;
+    var inp = document.getElementById("f_postcode");
+    var btn = document.getElementById("pcLookup");
+    if (!inp) return;
+    if (rec && isFinite(rec.lat) && isFinite(rec.lng)) {
+      editorGeo = { postcode: rec.postcode || "", lat: +rec.lat, lng: +rec.lng, area: rec.area || "", geo: true };
+      setPcStatus(rec.postcode ? ("✓ " + rec.postcode + (rec.area ? " · " + rec.area : "")) : "✓ Location set from the map", "ok");
+    } else if (rec && rec.postcode) {
+      setPcStatus("Not looked up yet — press Look up.");
+    }
+    if (btn) btn.addEventListener("click", doLookup);
+    inp.addEventListener("change", doLookup);
+    inp.addEventListener("keydown", function(e){ if (e.key === "Enter") { e.preventDefault(); doLookup(); } });
+    var t;
+    inp.addEventListener("input", function(){
+      clearTimeout(t);
+      var q = inp.value.trim();
+      if (q.length < 2) return;
+      t = setTimeout(function(){
+        pcAutocomplete(q).then(function(list){
+          var dl = document.getElementById("pcSuggest");
+          if (dl) dl.innerHTML = list.map(function(pc){ return '<option value="' + esc(pc) + '"></option>'; }).join("");
+        });
+      }, 250);
+    });
+  }
+  function shrinkImage(file, maxW, cb){
+    var reader = new FileReader();
+    reader.onload = function(){
+      var img = new Image();
+      img.onload = function(){
+        var scale = Math.min(1, maxW / (img.width || maxW));
+        var w = Math.max(1, Math.round(img.width * scale)), h = Math.max(1, Math.round(img.height * scale));
+        var c = document.createElement("canvas");
+        c.width = w; c.height = h;
+        try {
+          c.getContext("2d").drawImage(img, 0, 0, w, h);
+          cb(c.toDataURL("image/jpeg", 0.7));
+        } catch (e) { cb(null); }
+      };
+      img.onerror = function(){ cb(null); };
+      img.src = reader.result;
+    };
+    reader.onerror = function(){ cb(null); };
+    reader.readAsDataURL(file);
+  }
+  function renderImgPreview(){
+    var box = document.getElementById("f_image");
+    var prev = document.getElementById("imgPrev");
+    if (!box || !prev) return;
+    var src = box.value.trim() || editorImage;
+    prev.innerHTML = src ? '<img src="' + esc(src) + '" alt="">' : "";
+  }
+  function initImage(rec){
+    editorImage = (rec && rec.image) ? rec.image : "";
+    var box = document.getElementById("f_image");
+    if (!box) return;
+    if (editorImage && editorImage.slice(0, 5) !== "data:") box.value = editorImage;
+    renderImgPreview();
+    box.addEventListener("input", function(){ editorImage = ""; renderImgPreview(); });
+    var upBtn = document.getElementById("imgUpload");
+    var file = document.getElementById("imgFile");
+    var clr = document.getElementById("imgClear");
+    if (upBtn && file) {
+      upBtn.addEventListener("click", function(){ file.click(); });
+      file.addEventListener("change", function(){
+        var f = file.files && file.files[0];
+        if (!f) return;
+        upBtn.textContent = "Shrinking…";
+        shrinkImage(f, 200, function(uri){
+          upBtn.textContent = "Upload…";
+          file.value = "";
+          if (!uri) { alert("Couldn't read that image."); return; }
+          editorImage = uri;
+          box.value = "";
+          renderImgPreview();
+        });
+      });
+    }
+    if (clr) clr.addEventListener("click", function(){ editorImage = ""; box.value = ""; renderImgPreview(); });
+  }
+  function initEvent(rec){
+    var start = document.getElementById("f_date");
+    var end = document.getElementById("f_endDate");
+    var allDay = document.getElementById("f_allDay");
+    var timeInp = document.getElementById("f_time");
+    if (!start) return;
+    var prevStart = start.value;
+    if (end && !end.value && start.value) end.value = start.value;
+    function syncTime(){
+      if (!timeInp) return;
+      var row = timeInp.closest(".field");
+      var on = !!(allDay && allDay.checked);
+      if (row) row.hidden = on;
+      if (on) timeInp.value = "";
+    }
+    syncTime();
+    if (allDay) allDay.addEventListener("change", syncTime);
+    start.addEventListener("change", function(){
+      if (end && (!end.value || end.value < start.value || end.value === prevStart)) end.value = start.value;
+      prevStart = start.value;
+    });
+  }
+  function openEditor(type, rec){
+    editorType = type;
+    editorRec = rec || null;
+    var cfg = EDIT[type];
+    document.getElementById("modalTitle").textContent = (rec && rec.id ? "Edit " : "Add ") + cfg.noun;
+    document.getElementById("modalDelete").hidden = !(rec && rec.id);
+    var form = document.getElementById("modalForm");
+    form.innerHTML = cfg.fields.map(function(f){ return fieldHTML(f, rec); }).join("") + (cfg.hint ? '<p class="hint">' + cfg.hint + '</p>' : "");
+    if (cfg.fields.some(function(f){ return f.type === "stops"; })) initStops(rec);
+    if (cfg.fields.some(function(f){ return f.type === "postcode"; })) initPostcode(rec);
+    if (cfg.fields.some(function(f){ return f.type === "image"; })) initImage(rec);
+    if (type === "event") initEvent(rec);
+    var bd = document.getElementById("modalBackdrop");
+    bd.hidden = false;
+    var first = form.querySelector("input,select,textarea");
+    if (first) first.focus();
+  }
+  function closeModal(){
+    document.getElementById("modalBackdrop").hidden = true;
+    document.getElementById("modalForm").innerHTML = "";
+    editorType = null; editorRec = null; editorGeo = null; editorImage = "";
+  }
+  function submitEditor(e){
+    e.preventDefault();
+    if (!editorType) return;
+    var cfg = EDIT[editorType], form = document.getElementById("modalForm"), data = {};
+    for (var k = 0; k < cfg.fields.length; k++) {
+      var f = cfg.fields[k];
+      if (f.type === "hiddenbool") { data[f.name] = editorRec ? !!editorRec[f.name] : false; continue; }
+      if (f.type === "checkbox") { var cb = form.querySelector("#f_" + f.name); data[f.name] = !!(cb && cb.checked); continue; }
+      if (f.type === "image") { var ib = form.querySelector("#f_image"); data[f.name] = (ib && ib.value.trim()) || editorImage || ""; continue; }
+      if (f.type === "postcode") continue; // handled after the loop
+      if (f.type === "checkboxes") {
+        data[f.name] = [].map.call(form.querySelectorAll('input[name="' + f.name + '"]:checked'), function(x){ return x.value; });
+        continue;
+      }
+      if (f.type === "stops") {
+        data.stops = [].map.call(form.querySelectorAll(".stop-row"), function(r){
+          return { place: r.querySelector(".stop-place").value.trim(), highlights: r.querySelector(".stop-hl").value.trim() };
+        }).filter(function(s){ return s.place || s.highlights; });
+        continue;
+      }
+      var inp = form.querySelector('[name="' + f.name + '"]');
+      var val = inp ? inp.value.trim() : "";
+      if (f.type === "number") val = val === "" ? null : parseFloat(val);
+      if (f.required && (val === "" || val == null || (f.type === "number" && isNaN(val)))) {
+        if (inp) { inp.focus(); if (inp.reportValidity) inp.reportValidity(); }
+        return;
+      }
+      data[f.name] = val;
+    }
+
+    function finishSave(){
+      var p = (editorRec && editorRec.id) ? patch(cfg.coll, editorRec, data) : store.add(cfg.coll, data);
+      saveCatch(p);
+      closeModal();
+    }
+
+    if (editorType === "event") {
+      if (!data.endDate || data.endDate < data.date) data.endDate = data.date;
+      if (data.allDay) data.time = "";
+    }
+
+    if (editorType === "place") {
+      var pcInp = form.querySelector("#f_postcode");
+      var raw = pcInp ? pcInp.value.trim() : "";
+      var applyGeo = function(g){
+        if (g) { data.postcode = g.postcode || raw; data.lat = g.lat; data.lng = g.lng; data.area = g.area || ""; data.geo = true; }
+        else   { data.postcode = raw; data.lat = null; data.lng = null; data.area = ""; data.geo = false; }
+        finishSave();
+      };
+      if (raw && editorGeo && normPC(editorGeo.postcode) === normPC(raw)) return applyGeo(editorGeo);
+      if (!raw) { return applyGeo(editorGeo && isFinite(editorGeo.lat) ? editorGeo : null); }
+      if (!looksLikePostcode(raw)) {
+        if (window.confirm("That postcode looks incomplete, so this place won't show on the map. Save it anyway?")) applyGeo(null);
+        return;
+      }
+      setPcStatus("Looking up…");
+      geocodePostcode(raw).then(applyGeo, function(){
+        if (window.confirm("Couldn't look up that postcode (no match, or no connection). Save without a map pin?")) applyGeo(null);
+      });
+      return;
+    }
+
+    finishSave();
+  }
+
+  /* ---------- actions ---------- */
+  function del(n, id, key){
+    var it = find(n, id);
+    if (!it) return;
+    if (window.confirm('Delete "' + (it[key] || "this item") + '"?')) {
+      if (state.openHoliday === id) state.openHoliday = null;
+      saveCatch(store.remove(n, id));
+    }
+  }
+  function handleAct(act, id, filter, date){
+    if (!store) return;
+    switch (act) {
+      case "add-todo": return openEditor("todo", null);
+      case "add-place": return openEditor("place", null);
+      case "add-watch": return openEditor("watch", null);
+      case "add-holiday": return openEditor("holiday", null);
+      case "add-event": { var ed = date || toISODate(new Date()); return openEditor("event", { date: ed, endDate: ed }); }
+      case "seed-todo": return SEED.todo.forEach(function(d){ saveCatch(store.add("todos", clone(d))); });
+      case "seed-place": return SEED.place.forEach(function(d){ saveCatch(store.add("places", clone(d))); });
+      case "seed-watch": return SEED.watch.forEach(function(d){ saveCatch(store.add("watchlist", clone(d))); });
+      case "seed-holiday": return SEED.holiday.forEach(function(d){ saveCatch(store.add("holidays", clone(d))); });
+      case "edit-todo": return openEditor("todo", find("todos", id));
+      case "edit-place": return openEditor("place", find("places", id));
+      case "edit-watch": return openEditor("watch", find("watchlist", id));
+      case "edit-holiday": return openEditor("holiday", find("holidays", id));
+      case "edit-event": return openEditor("event", find("events", id));
+      case "del-todo": return del("todos", id, "title");
+      case "del-place": return del("places", id, "name");
+      case "del-watch": return del("watchlist", id, "title");
+      case "del-holiday": return del("holidays", id, "title");
+      case "del-event": return del("events", id, "title");
+      case "toggle-todo": { var t = find("todos", id); if (t) saveCatch(patch("todos", t, { done: !t.done })); return; }
+      case "toggle-watch": { var w = find("watchlist", id); if (w) saveCatch(patch("watchlist", w, { watched: !w.watched })); return; }
+      case "toggle-holiday": state.openHoliday = state.openHoliday === id ? null : id; return renderHolidays();
+      case "select-place": return selectPlace(id, { fromList: true });
+      case "filter-watch": state.watchFilter = filter; return renderWatch();
+      case "dip-place": return doDipPlace();
+      case "dip-clear-place": state.dipPlace = null; state.dipPlaceMiss = ""; return renderDipPlace();
+      case "dip-show": {
+        selectPlace(id, { fromList: true });
+        var mf = document.getElementById("mapFrame");
+        if (mf) mf.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+      case "dip-watch": return doDipWatch();
+      case "dip-clear-watch": state.dipWatch = null; state.dipWatchMiss = ""; return renderDipWatch();
+      case "cal-prev": return stepMonth(-1);
+      case "cal-next": return stepMonth(1);
+      case "cal-today": { var cn = new Date(); state.calYear = cn.getFullYear(); state.calMonthIndex = cn.getMonth(); return renderCalendar(); }
+    }
+  }
+
+  /* ---------- tabs ---------- */
+  var TAB_NAMES = ["todos","places","watchlist","holidays","calendar"];
+  function showTab(name){
+    if (TAB_NAMES.indexOf(name) < 0) name = "todos";
+    [].forEach.call(document.querySelectorAll(".tab"), function(b){
+      var on = b.getAttribute("data-tab") === name;
+      b.classList.toggle("is-active", on);
+      b.setAttribute("aria-selected", on ? "true" : "false");
+      b.tabIndex = on ? 0 : -1;
+    });
+    [].forEach.call(document.querySelectorAll(".panel"), function(p){ p.hidden = p.id !== "panel-" + name; });
+    if (location.hash.slice(1) !== name) history.replaceState(null, "", "#" + name);
+  }
+
+  /* ---------- wire up ---------- */
+  function bind(){
+    document.addEventListener("click", function(e){
+      var t = e.target.closest("[data-act]");
+      if (!t) return;
+      handleAct(t.getAttribute("data-act"), t.getAttribute("data-id"), t.getAttribute("data-filter"), t.getAttribute("data-date"));
+    });
+    document.addEventListener("keydown", function(e){
+      if (e.key === "Escape" && !document.getElementById("modalBackdrop").hidden) { closeModal(); return; }
+      if (e.key !== "Enter" && e.key !== " ") return;
+      var el = e.target;
+      if (!el || !el.classList) return;
+      if (el.classList.contains("cal-cell")) { e.preventDefault(); return handleAct("add-event", null, null, el.getAttribute("data-date")); }
+      if (el.classList.contains("cal-up-row")) { e.preventDefault(); return handleAct("edit-event", el.getAttribute("data-id"), null, null); }
+    });
+    var tabsNav = document.getElementById("tabs");
+    tabsNav.addEventListener("click", function(e){
+      var b = e.target.closest(".tab");
+      if (b) showTab(b.getAttribute("data-tab"));
+    });
+    tabsNav.addEventListener("keydown", function(e){
+      if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+      var tabs = [].slice.call(tabsNav.querySelectorAll(".tab"));
+      var i = tabs.map(function(x){ return x.classList.contains("is-active"); }).indexOf(true);
+      var ni = (i + (e.key === "ArrowRight" ? 1 : tabs.length - 1)) % tabs.length;
+      showTab(tabs[ni].getAttribute("data-tab"));
+      tabs[ni].focus();
+      e.preventDefault();
+    });
+    window.addEventListener("hashchange", function(){ showTab(location.hash.slice(1)); });
+    window.addEventListener("beforeunload", function(e){
+      if (dirty && dataJsonLoaded) { e.preventDefault(); e.returnValue = ""; }
+    });
+    document.getElementById("modalForm").addEventListener("submit", submitEditor);
+    document.getElementById("modalClose").addEventListener("click", closeModal);
+    document.getElementById("modalCancel").addEventListener("click", closeModal);
+    document.getElementById("modalDelete").addEventListener("click", function(){
+      if (!editorType || !editorRec || !editorRec.id) return;
+      var cfg = EDIT[editorType];
+      if (window.confirm("Delete this " + cfg.noun + "?")) {
+        if (state.openHoliday === editorRec.id) state.openHoliday = null;
+        saveCatch(store.remove(cfg.coll, editorRec.id));
+        closeModal();
+      }
+    });
+    document.getElementById("modalBackdrop").addEventListener("click", function(e){
+      if (e.target === e.currentTarget) closeModal();
+    });
+    document.getElementById("exportBtn").addEventListener("click", exportData);
+    var impFile = document.getElementById("importFile");
+    document.getElementById("importBtn").addEventListener("click", function(){ impFile.click(); });
+    impFile.addEventListener("change", function(){
+      if (impFile.files && impFile.files[0]) importData(impFile.files[0]);
+      impFile.value = "";
+    });
+  }
+
+  buildMap();
+  bind();
+  showTab(location.hash.slice(1));
+  initStore();
+  resolveHome();
+})();
+</script>
+</body>
+</html>
